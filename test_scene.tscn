@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=3 uid="uid://byw205rxrniov"]
+
+[ext_resource type="PackedScene" uid="uid://dmatvhsssgfqa" path="res://vertex_anchor3d.tscn" id="2_4pasf"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_13f0d"]
+lightmap_size_hint = Vector2i(14, 21)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_cyb77"]
+
+[node name="test_scene" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0.5, 1.5)
+mesh = SubResource("BoxMesh_13f0d")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("BoxShape3D_cyb77")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.707107, -0.143392, 0.692415, 0, 0.979223, 0.202787, -0.707107, -0.143392, 0.692415, 3.5, 1.5, 3.5)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.36602, 0)
+
+[node name="VertexAnchor3D" parent="." node_paths=PackedStringArray("target_node") instance=ExtResource("2_4pasf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 1)
+target_node = NodePath("../MeshInstance3D")

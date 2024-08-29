@@ -1,0 +1,23 @@
+[gd_scene load_steps=2 format=3 uid="uid://bf1y6w6q6im1i"]
+
+[ext_resource type="Script" path="res://anchor3d.gd" id="1_r5kb4"]
+
+[node name="Anchor3D" type="Node3D"]
+script = ExtResource("1_r5kb4")
+
+[node name="Axes" type="Node3D" parent="."]
+
+[node name="RayCast3DX" type="RayCast3D" parent="Axes"]
+target_position = Vector3(4, 0, 0)
+debug_shape_custom_color = Color(1, 0, 0, 1)
+debug_shape_thickness = 4
+
+[node name="RayCast3DY" type="RayCast3D" parent="Axes"]
+target_position = Vector3(0, 4, 0)
+debug_shape_custom_color = Color(0.583333, 1, 0, 1)
+debug_shape_thickness = 4
+
+[node name="RayCast3DZ" type="RayCast3D" parent="Axes"]
+target_position = Vector3(0, 0, 4)
+debug_shape_custom_color = Color(0, 0.533333, 1, 1)
+debug_shape_thickness = 4

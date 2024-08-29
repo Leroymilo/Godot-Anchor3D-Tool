@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=3 uid="uid://dmatvhsssgfqa"]
+
+[ext_resource type="Script" path="res://vertex_anchor3d.gd" id="1_kgea0"]
+[ext_resource type="PackedScene" uid="uid://bf1y6w6q6im1i" path="res://anchor3d.tscn" id="1_kp1wd"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_sprrs"]
+radius = 0.2
+height = 0.4
+radial_segments = 16
+rings = 7
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_amirx"]
+albedo_color = Color(0, 1, 0.583333, 1)
+
+[node name="VertexAnchor3D" instance=ExtResource("1_kp1wd")]
+script = ExtResource("1_kgea0")
+vertex_index = 0
+
+[node name="Visualization" type="MeshInstance3D" parent="." index="1"]
+mesh = SubResource("SphereMesh_sprrs")
+surface_material_override/0 = SubResource("StandardMaterial3D_amirx")
