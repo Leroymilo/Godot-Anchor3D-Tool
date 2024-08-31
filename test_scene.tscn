@@ -10,7 +10,7 @@ lightmap_size_hint = Vector2i(14, 21)
 [node name="test_scene" type="Node3D"]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0.5, 1.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.19209e-07, 1, 1)
 mesh = SubResource("BoxMesh_13f0d")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
@@ -26,5 +26,15 @@ transform = Transform3D(0.707107, -0.143392, 0.692415, 0, 0.979223, 0.202787, -0
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.36602, 0)
 
 [node name="VertexAnchor3D" parent="." node_paths=PackedStringArray("target_node") instance=ExtResource("2_4pasf")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 1)
-target_node = NodePath("../MeshInstance3D")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0.5, 0.5)
+vertex_index = 7
+target_type = 1
+target_node = NodePath("../StaticBody3D/CollisionShape3D")
+follow_node_rotation = true
+
+[node name="VertexAnchor3D" parent="VertexAnchor3D" node_paths=PackedStringArray("target_node") instance=ExtResource("2_4pasf")]
+visualize = false
+visual_axes_size = 2.0
+anchor_type = 1
+target_node = NodePath("../../MeshInstance3D")
+follow_node_rotation = true

@@ -48,6 +48,7 @@ enum ANCHORTYPE {
 @export var anchor_type: ANCHORTYPE:
 	set(value):
 		anchor_type = value
+		anchor()
 
 enum TARGETTYPE {
 	MESH,	## Snaps to/grabs on the [Mesh] of a [MeshInstance3D]
@@ -127,7 +128,13 @@ var node_loaded: bool = false:
 var geometry: Geometry = null
 
 ## internal
+var self_transf: Transform3D = Transform3D.IDENTITY
+## internal
 var target_transf: Transform3D = Transform3D.IDENTITY
+## internal
+var target_pos: Vector3 = Vector3.ZERO
+## internal
+var target_rot: Vector3 = Vector3.ZERO
 ## internal
 var self_pos: Vector3 = Vector3.ZERO
 ## internal
@@ -183,6 +190,14 @@ func _process(_delta: float) -> void:
 			
 			if target_node.global_transform != target_transf:
 				anchor()
+		
+		if anchor_type == ANCHORTYPE.GRAB:
+			target_node.global_position = target_pos
+			if follow_node_rotation:
+				target_node.global_rotation = target_rot
+			
+			if global_transform != self_transf:
+				anchor()
 
 func update_count():
 	# to override
@@ -202,6 +217,9 @@ func anchor():
 	
 	self_pos = global_position
 	self_rot = global_rotation
+	target_pos = target_node.global_position
+	target_rot = target_node.global_rotation
+	self_transf = global_transform
 	target_transf = target_node.global_transform
 
 func snap():

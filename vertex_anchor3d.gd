@@ -49,10 +49,21 @@ func snap():
 	
 	global_transform = Transform3D.IDENTITY
 	global_transform *= target_node.global_transform
-	global_transform *= geometry.get_transform(vertex_index, follow_primitive_rotation)
+	global_transform *= geometry.get_transform(
+		vertex_index, follow_primitive_rotation
+	)
 	
 	if not follow_node_rotation:
 		global_rotation = prev_rot
 
 func grab():
-	pass
+	var prev_rot: Vector3 = target_node.global_rotation
+	
+	target_node.global_transform = Transform3D.IDENTITY
+	target_node.global_transform *= global_transform
+	target_node.global_transform *= geometry.get_transform(
+		vertex_index, follow_primitive_rotation
+	).inverse()
+	
+	if not follow_node_rotation:
+		target_node.global_rotation = prev_rot

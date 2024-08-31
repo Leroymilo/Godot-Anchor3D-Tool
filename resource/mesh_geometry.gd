@@ -41,19 +41,3 @@ static func align(vect: Vector3) -> Vector3:
 	if abs(vect.y) < 0.0001: vect.y = 0
 	if abs(vect.z) < 0.0001: vect.z = 0
 	return vect
-
-func get_count(with_rot: bool = false) -> int:
-	if with_rot:
-		return offsets.size()
-	return indices.size()
-
-func get_transform(id: int, with_rot: bool = false) -> Transform3D:
-	if not with_rot:
-		id = indices[id]
-	var transform = Transform3D.IDENTITY.translated(offsets[id])
-	if with_rot:
-		transform *= Transform3D(
-			Basis(bases[3*id], bases[3*id+1], bases[3*id+2]),
-			Vector3.ZERO
-		)
-	return transform
